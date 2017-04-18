@@ -3,8 +3,10 @@
 This small python3 scripts allows you to check for differences between your
 implementation of the utilities `nm` and `otool`
 
-*Do not use this script to determine a student's grade* without discussing
+**Do not use this script to determine a student's grade** without discussing
 with him, it may contain errors and he might not have handled some tricky cases.
+Moreover this script doesn't test every behviours (like launching `nm` without any parameter),
+passing every tests doesn't mean you'll get a good grade. Consider yourslef warned.
 
 # Install
 
@@ -33,6 +35,11 @@ one line test for this project might be:
 
 see se usage `python3 unit_test -h` for a detailed explanation of every flags.
 
+# Custom Tests folders
+
+The osx implementations of `nm and otool` handle a lot of parsing errors, the folder
+`custom_tests` contains some basic tests, as well as some harder ones. (If you did not handle
+parsing errors you'll definitely get a segmentation fault)
 
 
 if you have any suggestions feel free to contact me
