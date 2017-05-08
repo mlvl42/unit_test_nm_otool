@@ -33,7 +33,7 @@ one line test for this project might be:
 
 `python3 unit_test.py -eR /bin /sbin /usr/sbin /usr/bin /usr/lib`
 
-see se usage `python3 unit_test -h` for a detailed explanation of every flags.
+Use the help parameter : `python3 unit_test -h` for a detailed explanation of every flags.
 
 # Custom Tests folders
 
