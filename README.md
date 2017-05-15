@@ -1,10 +1,12 @@
 # 42 ft_nm && ft_otool unit_tester
 
-This small python3 scripts allows you to check for differences between your
+This small python3 script allows you to check for differences between your
 implementation of the utilities `nm` and `otool`
 
-*Do not use this script to determine a student's grade* without discussing
+**Do not use this script to determine a student's grade** without discussing
 with him, it may contain errors and he might not have handled some tricky cases.
+Moreover this script doesn't test every behaviours (like launching `nm` without any parameter),
+passing every tests doesn't mean you'll get a good grade. Consider yourself warned.
 
 # Install
 
@@ -26,13 +28,18 @@ If you wish to test every files (including non mach-o ones):
 
 `python3 unit_test.py -N /bin`
 
-It is also possible to test files recusrively on multiple folder, a good
+It is also possible to test files recursively on multiple folders, a good
 one line test for this project might be:
 
 `python3 unit_test.py -eR /bin /sbin /usr/sbin /usr/bin /usr/lib`
 
-see se usage `python3 unit_test -h` for a detailed explanation of every flags.
+Use the help parameter : `python3 unit_test -h` for a detailed explanation of every flags.
+
+# Custom Tests folders
+
+The OSx implementations of `nm and otool` handle a lot of parsing errors, the folder
+`custom_tests` contains some basic tests, as well as some harder ones. (If you did not handle
+parsing errors you'll definitely get a segmentation fault)
 
 
-
-if you have any suggestions feel free to contact me
+If you have any suggestions feel free to contact me.
