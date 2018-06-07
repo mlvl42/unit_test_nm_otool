@@ -7,7 +7,7 @@ import textwrap
 
 
 # absolute path to your nm_otool project
-PROJECT_PATH = '/path/to/your/project'
+PROJECT_PATH = '/Users/guillaume/Documents/test42/ft_nm-ft_otool/'
 
 NM_PATH = os.path.join(PROJECT_PATH, 'ft_nm')
 OTOOL_PATH = os.path.join(PROJECT_PATH, 'ft_otool')
@@ -16,8 +16,8 @@ OTOOL_PATH = os.path.join(PROJECT_PATH, 'ft_otool')
 def execute(cmd):
     proc = subprocess.Popen(cmd, shell=True, stdin=subprocess.DEVNULL, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     output, error = proc.communicate()
-    output = output.decode().rstrip()
-    error = error.decode().rstrip()
+    output = output.decode('unicode-escape').rstrip()
+    error = error.decode('unicode-escape').rstrip()
     rc = proc.returncode
     return (output, rc, error)
 
@@ -139,7 +139,7 @@ def tests_main(args):
     if errors:
         print("\n[!] total amount of errors: \033[91m{}\033[0m".format(errors))
     else:
-        print("\n\[T]/ no error occured, \033[92mgood job!\033[0m".format(errors))
+        print("\n[T]/ no error occured, \033[92mgood job!\033[0m")
 
     return errors
 
