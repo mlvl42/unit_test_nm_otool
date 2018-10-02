@@ -1,3 +1,6 @@
+#!/usr/bin/python3
+# -*- coding: utf-8 -*-
+
 import sys
 import os
 import signal
@@ -7,7 +10,7 @@ import textwrap
 
 
 # absolute path to your nm_otool project
-PROJECT_PATH = '/Users/guillaume/Documents/test42/ft_nm-ft_otool/'
+PROJECT_PATH = 'YOUR PATH'
 
 NM_PATH = os.path.join(PROJECT_PATH, 'ft_nm')
 OTOOL_PATH = os.path.join(PROJECT_PATH, 'ft_otool')
