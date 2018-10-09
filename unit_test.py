@@ -37,6 +37,8 @@ def tests_nm(tests_array, args):
     errors = 0
     title("NM unit_tests")
 
+    if len(tests_array) == 0 :
+        return errors
     # get the longest test name, useful for padding
     max_len = max(tests_array, key=len)
     max_len = len(max_len)
