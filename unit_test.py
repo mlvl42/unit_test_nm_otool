@@ -77,6 +77,8 @@ def tests_nm(tests_array, args, opt):
 def tests_otool(tests_array, args, opt):
     errors = 0
 
+    if len(tests_array) == 0 :
+        return errors
     # get the longest test name, useful for padding
     max_len = max(tests_array, key=len)
     max_len = len(max_len)
@@ -149,14 +151,15 @@ def tests_main(args):
                 print("[+] Test nm -{} option".format(opt))
                 errors += tests_nm(files_to_test, args, opt)
         else:
-            errors += tests_nm(files_to_test, args)
+            errors += tests_nm(files_to_test, args, opt=None)
     if args.otool:
         title("OTOOL unit_tests")
         if args.options:
             for opt in args.options:
                 print("[+] Test otool -{} option".format(opt))
                 errors += tests_otool(files_to_test, args, opt)
-
+        else:
+            errors += tests_otool(files_to_test, args, opt=None)
     if errors:
         print("\n[!] total amount of errors: \033[91m{}\033[0m".format(errors))
     else:
