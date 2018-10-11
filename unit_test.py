@@ -32,10 +32,9 @@ def title(str):
     print()
 
 
-def tests_nm(tests_array, args):
+def tests_nm(tests_array, args, opt):
 
     errors = 0
-    title("NM unit_tests")
 
     if len(tests_array) == 0 :
         return errors
@@ -46,8 +45,12 @@ def tests_nm(tests_array, args):
     for t in tests_array:
 
         # execute nm and ft_nm
-        nm_out , nm_rc , _ = execute("{} {}".format("nm", t))
-        out , rc , err = execute("{} {}".format(NM_PATH, t))
+        if opt:
+            nm_out , nm_rc , _ = execute("{} -{} {}".format("nm", opt, t))
+            out , rc , err = execute("{} -{} {}".format(NM_PATH, opt, t))
+        else:
+            nm_out , nm_rc , _ = execute("{} {}".format("nm", t))
+            out , rc , err = execute("{} {}".format(NM_PATH, t))
 
         # compare their return value and output
         if rc == -signal.SIGSEGV:
@@ -71,9 +74,8 @@ def tests_nm(tests_array, args):
     return errors
 
 
-def tests_otool(tests_array):
+def tests_otool(tests_array, args, opt):
     errors = 0
-    title("OTOOL unit_tests")
 
     # get the longest test name, useful for padding
     max_len = max(tests_array, key=len)
@@ -81,8 +83,12 @@ def tests_otool(tests_array):
 
     for t in tests_array:
 
-        otool_out , otool_rc , _ = execute("{} {}".format("otool -t ", t))
-        out , rc , err = execute("{} {}".format(OTOOL_PATH, t))
+        if opt:
+            otool_out , otool_rc , _ = execute("{} -{} {}".format("otool", opt, t))
+            out , rc , err = execute("{} -{} {}".format(OTOOL_PATH, opt, t))
+        else:
+            otool_out , otool_rc , _ = execute("{} {}".format("otool -t ", t))
+            out , rc , err = execute("{} {}".format(OTOOL_PATH, t))
 
         # compare their return value and output
         if rc == -signal.SIGSEGV:
@@ -137,9 +143,19 @@ def tests_main(args):
 
     # # launch tests
     if args.nm:
-        errors += tests_nm(files_to_test, args)
+        title("NM unit_tests")
+        if args.options:
+            for opt in args.options:
+                print("[+] Test nm -{} option".format(opt))
+                errors += tests_nm(files_to_test, args, opt)
+        else:
+            errors += tests_nm(files_to_test, args)
     if args.otool:
-        errors += tests_otool(files_to_test)
+        title("OTOOL unit_tests")
+        if args.options:
+            for opt in args.options:
+                print("[+] Test otool -{} option".format(opt))
+                errors += tests_otool(files_to_test, args, opt)
 
     if errors:
         print("\n[!] total amount of errors: \033[91m{}\033[0m".format(errors))
@@ -178,6 +194,7 @@ if __name__ == '__main__':
     parser.add_argument('--errors', '-e',  dest='errors', action='store_true', help="only output errors")
     parser.add_argument('--otool', '-o',  dest='nm', action='store_false', help="only test otool")
     parser.add_argument('--nm', '-n',  dest='otool', action='store_false', help="only test nm")
+    parser.add_argument('--options', '-p',  dest='options', help="set options to test separate by ';' ex: --options='a;n' (test -a and -n)")
     parser.set_defaults(recursive=False)
     parser.set_defaults(noignore=False)
     parser.set_defaults(errors=False)
@@ -190,6 +207,8 @@ if __name__ == '__main__':
 
     args = parser.parse_args()
 
+    if args.options:
+        args.options = args.options.split(';')
     # check configuration
     if not os.path.exists(NM_PATH) or not os.path.exists(OTOOL_PATH):
         if os.path.exists(PROJECT_PATH):
