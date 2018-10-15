@@ -35,6 +35,13 @@ one line test for this project might be:
 
 Use the help parameter : `python3 unit_test -h` for a detailed explanation of every flags.
 
+# Test option
+If you wish we can test ft_nm and ft_otool with option
+
+(test nm with option a and t in /bin directory )
+`./unit_test.py --nm --option='a;t' /bin`  
+
+
 # Custom Tests folders
 
 The OSx implementations of `nm and otool` handle a lot of parsing errors, the folder
