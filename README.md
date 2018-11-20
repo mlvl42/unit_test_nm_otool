@@ -35,6 +35,13 @@ one line test for this project might be:
 
 Use the help parameter : `python3 unit_test -h` for a detailed explanation of every flags.
 
+# Test option
+If you wish we can test ft_nm and ft_otool with option
+
+(test nm with option a and t in /bin directory )
+`./unit_test.py --nm --option='a;t' /bin`  
+
+
 # Custom Tests folders
 
 The OSx implementations of `nm and otool` handle a lot of parsing errors, the folder
@@ -43,3 +50,8 @@ parsing errors you'll definitely get a segmentation fault)
 
 
 If you have any suggestions feel free to contact me.
+
+
+Binairies:
+    https://github.com/JonathanSalwan/binary-samples/blob/master/MachO-OSX-x64-ls
+    https://github.com/UgurcanOzdemir/ft_nm-ft_otool_binaire_de_test/tree/e9bea5d2df9bd916b7e475f8aad8b137562c0117
